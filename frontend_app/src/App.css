@@ -1,104 +1,179 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1976d2;
+  --accent: #ff9800;
+  --secondary: #424242;
+  --taskBg: #fafbfc;
+  --taskBorder: #e5e7eb;
+  --complete: #a5d6a7;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+/* Reset & container */
+body {
+  background: #fff;
 }
 
-.App {
+.container {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff;
+  transition: background 0.3s;
+}
+
+/* Header styles */
+.todo-header {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
   text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 8px;
+  z-index: 3;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Input & Button */
+.task-input-form {
+  margin-bottom: 18px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.task-input {
+  border: 1px solid var(--primary);
+  background: #f5f8fd;
+  color: #26272d;
+  font: inherit;
+  outline: none;
+  transition: border 0.20s;
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+.task-input:focus {
+  border-color: var(--accent);
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+/* Add button */
+.btn {
+  background: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 7px;
   font-weight: 600;
+  font-size: 18px;
+  padding: 0.5em 1.1em;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: background 0.2s;
+  box-shadow: 0 0.5px 3px #eeeeee99;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.btn:disabled {
+  background: #ffecb380;
+  cursor: not-allowed;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.btn-delete {
+  background: transparent !important;
+  color: var(--secondary);
+  font-size: 22px !important;
+  padding: 0 0.5em !important;
+  transition: color 0.14s;
+  opacity: 0.7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn-delete:hover { color: #c13a3a; opacity: 1; }
+
+.filter-btn {
+  min-width: 85px;
+}
+
+.filter-btn[aria-pressed="true"] {
+  outline: 2px solid var(--accent) !important;
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+/* Task List */
+.task-list {
+  margin: 0;
+  margin-bottom: 4px;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.task-item {
+  transition: background 0.18s;
+  border-bottom: 1px solid var(--taskBorder);
+  display: flex;
+  align-items: center;
+  padding: 0.8em 0.2em 0.7em 0.2em;
+  background: #fff;
+}
+
+.task-item:last-child {
+  border: none;
+}
+
+.checkbox {
+  accent-color: var(--primary);
+  width: 20px; height: 20px; margin-right: 12px;
+  cursor: pointer;
+}
+
+.task-text {
+  cursor: pointer;
+  flex: 1;
+  font-size: 1.1em;
+  padding: 2px 0;
+}
+
+.task-text:focus {
+  outline: 1.5px dashed var(--primary);
+  background: #eaf4ff73;
+  border-radius: 5px;
+}
+
+.edit-input {
+  font: inherit;
+  border-radius: 7px;
+  border: 1.5px solid var(--accent) !important;
+  padding: 0.5em 0.7em;
+  margin-right: 10px;
+  outline: none;
+  min-width: 0;
+}
+
+.edit-input:focus {
+  border-color: var(--primary);
+}
+
+/* Filters section */
+.filters-section {
+  margin-top: 22px;
+}
+
+/* Footer */
+.footer {
+  font-size: 0.98em;
+  color: #adb5bd;
+  margin-top: 25px;
+  letter-spacing: 0.01em;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container, main {
+    border-radius: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    box-shadow: none !important;
   }
-  to {
-    transform: rotate(360deg);
+  main {
+    min-width: 0 !important;
+    width: 100vw !important;
+    padding: 1rem 0.4rem 1.1rem 0.4rem !important;
   }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .todo-header {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    font-size: 0.98em;
   }
+  .footer { font-size: 0.9em; }
 }
